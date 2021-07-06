@@ -64,3 +64,48 @@ form button:hover {
   color: white;
   background-color: darkgreen;
 }
+
+.todo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul{
+  list-style-type: none;
+}
+
+.todo-item-container{
+    /* min-width: 20px; */
+    max-width: 70%;
+  /* padding: 10px 0; */
+}
+
+.todo-item{
+  display: inline-block;
+}
+
+.check-item{
+  color: darkgreen;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.check-item:hover{
+  color: white;
+  background-color: darkgreen;
+}
+
+.delete-item{
+  color: red;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-item:hover{
+  color: white;
+  background-color: red;
+}
+

@@ -9,6 +9,13 @@ html {
   box-sizing: inherit;
 }
 
+/* I had a problem with the clicks on the buttons (has to do with bubbling). This article fixed it:
+https://css-tricks.com/slightly-careful-sub-elements-clickable-things/ */
+
+button > * {
+  pointer-events: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -71,41 +78,48 @@ form button:hover {
   align-items: center;
 }
 
-ul{
+ul {
   list-style-type: none;
 }
 
-.todo-item-container{
-    /* min-width: 20px; */
-    max-width: 70%;
+.todo-item-container {
+  /* min-width: 20px; */
+  min-width: 70%;
   /* padding: 10px 0; */
 }
 
-.todo-item{
-  display: inline-block;
+.unchecked-todo-item {
+  color: white;
+  padding: 10px 0;
 }
 
-.check-item{
+.checked-todo-item {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2.5pt;
+}
+
+.check-item {
+  /* margin-left: 20px; */
   color: darkgreen;
   background-color: white;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.check-item:hover{
+.check-item:hover {
   color: white;
   background-color: darkgreen;
 }
 
-.delete-item{
+.delete-item {
   color: red;
   background-color: white;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.delete-item:hover{
+.delete-item:hover {
   color: white;
   background-color: red;
 }
-

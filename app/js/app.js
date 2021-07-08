@@ -31,27 +31,23 @@ function addTodoItem(evt) {
         //     </button>
         //   </div > -->
 
-
         // Creating the check button
         const newCheckButton = document.createElement('button');
         newCheckButton.innerHTML = `<i class="far fa-square"></i> `;
         newCheckButton.setAttribute('id',`item_${itemNumber}_check`);
-        newCheckButton.setAttribute('class',"btn");
-        newCheckButton.setAttribute('class',"check-item");
+        newCheckButton.setAttribute('class',"btn check-item");
 
         // Creating the delete button
         const newDeleteButton = document.createElement('button');
         newDeleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`;
         newDeleteButton.setAttribute('id',`item_${itemNumber}_delete`);
-        newDeleteButton.setAttribute('class',"btn");
-        newDeleteButton.setAttribute('class',"delete-item");
+        newDeleteButton.setAttribute('class',"btn delete-item");
 
         // Creating the li element
         const newTodoItem = document.createElement('li');
-        newTodoItem.setAttribute('class',"unchecked-todo-item");
+        newTodoItem.setAttribute('class',"todo-item unchecked-todo-item");
         newTodoItem.setAttribute('id',`item_${itemNumber}`);
         newTodoItem.innerHTML = itemText + newCheckButton.outerHTML + newDeleteButton.outerHTML;
-
 
         todolist.appendChild(newTodoItem);
 
@@ -82,13 +78,14 @@ function respondToTheClick(evt) {
     // Now that we detect the clicks on the buttons, we need to indentify wheather it is a delete click or check click.
     if (clickedBtnID.endsWith("delete"))
     {
-        const idOfTodoItem = clickedBtnID.substring(0, clickedBtnID.length - 7); // removing the '_btn' from the id to get the section id we need to navigate to and make "active".
-        deleteTodoItem(idOfTodoItem);
+        // removing the '_delete' from the id to get the id of the todo item that we need to delete.
+        const idOfTodoItem = clickedBtnID.substring(0, clickedBtnID.length - 7);
+        deleteTodoItem(idOfTodoItem); // Calling the delete method to act on the todo item with the extracted id.
     } else if (clickedBtnID.endsWith("check"))
     {
-        console.log("check");
-            // <i class="fas fa-check-square"></i>
-
+        // removing the '_check' from the id to get the id of the todo item that we need to check.
+        const idOfTodoItem = clickedBtnID.substring(0, clickedBtnID.length - 6);
+        toggleCheckTodoItem(idOfTodoItem); // Calling the check method to act on the todo item with the extracted id.
     }
 }
 
@@ -97,6 +94,57 @@ function respondToTheClick(evt) {
 function deleteTodoItem(idOfTodoItem){
     todolist.removeChild(document.getElementById(idOfTodoItem));
 }
+
+/**
+ * A function to check the Todo item knowing its id.
+ * 
+ * We want to do two changes: (1) change the class to be checked instead of unchecked. (2) Change the content to have the
+ * checked box instead of the empty box. 
+ **/
+function toggleCheckTodoItem(idOfTodoItem){
+
+    let todoItem = document.querySelector(`#${idOfTodoItem}`); // Selecting the element of the todo item to be modified.
+
+if (todoItem.classList.contains("unchecked-todo-item"))
+{
+    // Modify the classes.
+    todoItem.classList.remove("unchecked-todo-item");
+    todoItem.classList.add("checked-todo-item");
+
+    /**
+     * Replace the unchecked button with the checked button
+     **/ 
+
+    // First, we create the new button element that we will use to replace the unchecked element.
+
+    const checkedButton = document.createElement('button');
+    checkedButton.innerHTML = `<i class="fas fa-check-square"></i>`;
+    checkedButton.setAttribute('id',`${idOfTodoItem}_check`);
+    checkedButton.setAttribute('class',"btn check-item");
+
+    // Now replace the unchecked button with this new button
+    document.querySelector(`#${idOfTodoItem}_check`).replaceWith(checkedButton);
+
+} else if (todoItem.classList.contains("checked-todo-item"))
+{
+    // Modify the classes.
+    todoItem.classList.remove("checked-todo-item");
+    todoItem.classList.add("unchecked-todo-item");
+
+    // First, we create the new button element that we will use to replace the unchecked element.
+
+    const uncheckedButton = document.createElement('button');
+    uncheckedButton.innerHTML = `<i class="far fa-square"></i> `;
+    uncheckedButton.setAttribute('id',`${idOfTodoItem}_check`);
+    uncheckedButton.setAttribute('class',"btn check-item");
+
+
+    // Now replace the unchecked button with this new button
+    document.querySelector(`#${idOfTodoItem}_check`).replaceWith(uncheckedButton);
+
+}
+}
+
 
 /**
  * Begin Events

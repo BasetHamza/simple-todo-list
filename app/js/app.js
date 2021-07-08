@@ -16,9 +16,9 @@ function addTodoItem(evt) {
     evt.preventDefault(); // Preventing the default action (which is for the button to jump to itself based on href='#') - Is there a better way to do that?
 
     // Extracting the todo item entered by the user in the form.
-    const itemText = document.getElementById('todo-input').value;
+    let itemText = document.getElementById('todo-input');
 
-    if (itemText !== "") { // If the box is not empty and the add button is clicked
+    if (itemText.value !== "") { // If the box is not empty and the add button is clicked
         //       < !--todo item structure - to be created by js-- >
 
         //   < !-- < div class="todo-item-container" >
@@ -47,7 +47,7 @@ function addTodoItem(evt) {
         const newTodoItem = document.createElement('li');
         newTodoItem.setAttribute('class',"todo-item unchecked-todo-item");
         newTodoItem.setAttribute('id',`item_${itemNumber}`);
-        newTodoItem.innerHTML = itemText + newCheckButton.outerHTML + newDeleteButton.outerHTML;
+        newTodoItem.innerHTML = itemText.value + newCheckButton.outerHTML + newDeleteButton.outerHTML;
 
         todolist.appendChild(newTodoItem);
 
@@ -62,7 +62,7 @@ function addTodoItem(evt) {
 
 
         // document.getElementById('todo-list').innerHTML += itemToBeAdded;
-
+        itemText.value = "";
         itemNumber++;
     }
 }

@@ -72,20 +72,30 @@ form button:hover {
   background-color: darkgreen;
 }
 
+.todo-list {
+  list-style-type: none;
+  min-width: 30%;
+  /* This will align the containers to be in the middle. */
+  max-width: 50%;
+}
+
 .todo-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.todo-list {
-  list-style-type: none;
-  min-width: 30%;
+.todo-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .todo-item {
+  font-size: 1.25rem;
   padding: 10px 0;
   margin: 0.5rem;
+  flex: 1;
 }
 
 .unchecked-todo-item {
@@ -96,6 +106,14 @@ form button:hover {
   text-decoration: line-through;
   text-decoration-color: red;
   text-decoration-thickness: 2.5pt;
+}
+
+.btn {
+  border: none;
+  padding: 1rem;
+  margin: 0%;
+  background: #4ca1af;
+  font-size: 1rem;
 }
 
 .check-item {
